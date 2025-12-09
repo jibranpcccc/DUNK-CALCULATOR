@@ -8,9 +8,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { jumpFatigueCalculatorSchema, type JumpFatigueCalculatorForm } from "@/lib/validation-schemas";
-import { ArrowLeft, Zap, TrendingDown, Clock, AlertTriangle } from "lucide-react";
+import { Zap, TrendingDown, TrendingUp, Clock, AlertTriangle, Calculator, Target } from "lucide-react";
 import SEOPageLayout from "@/components/shared/seo-page-layout";
-import { generateCalculatorSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
+import { generateCalculatorSchema, generateWebPageSchema, generateFAQSchema, BreadcrumbItem } from "@/lib/seo";
 
 interface FatigueResults {
   fatigueIndex: number;
@@ -39,9 +39,55 @@ export default function JumpFatigueCalculator() {
     },
   });
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators' },
+    { name: 'Jump Fatigue Calculator', url: '/calculators/jump-fatigue-calculator' }
+  ];
+
+  const seoData = {
+    title: "Jump Fatigue Calculator - Track Recovery & Optimize Performance | Dunk Calculator Pro",
+    description: "Professional jump fatigue calculator to track how fatigue affects your vertical jump. Get recovery recommendations, training adjustments, and optimize your jumping performance.",
+    keywords: "jump fatigue calculator, vertical jump fatigue, basketball recovery, jump recovery time, fatigue index, training fatigue, athletic performance recovery",
+    canonicalUrl: `${window.location.origin}/calculators/jump-fatigue-calculator`,
+    ogTitle: "Jump Fatigue Calculator - Track Recovery & Optimize Performance",
+    ogDescription: "Track how fatigue affects your jumping performance and get personalized recovery recommendations.",
+    twitterTitle: "Jump Fatigue Calculator - Track Recovery & Optimize Performance",
+    twitterDescription: "Calculate your jump fatigue index and get recovery recommendations for optimal training adaptation.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateCalculatorSchema(
+        "Jump Fatigue Calculator",
+        "Professional calculator that tracks how fatigue affects vertical jump performance. Compares rested vs fatigued jump heights to calculate fatigue index and provide recovery recommendations.",
+        `${window.location.origin}/calculators/jump-fatigue-calculator`,
+        ["Rested Jump Height", "Fatigued Jump Height", "Activity Type", "Duration", "Intensity Level", "Fitness Level"],
+        ["Fatigue Index", "Performance Drop", "Recovery Time", "Fatigue Type", "Training Adjustments"]
+      ),
+      generateWebPageSchema(
+        "Jump Fatigue Calculator - Track Recovery & Optimize Performance",
+        "Professional jump fatigue calculator to track how fatigue affects your vertical jump and get recovery recommendations.",
+        `${window.location.origin}/calculators/jump-fatigue-calculator`
+      ),
+      generateFAQSchema([
+        {
+          question: "What is a good fatigue index for athletes?",
+          answer: "A fatigue index below 10% indicates excellent fatigue resistance. 10-15% is normal for most training sessions. Above 20% suggests you may need additional recovery time before your next high-intensity session."
+        },
+        {
+          question: "How long should I rest between jump training sessions?",
+          answer: "Most athletes need 48-72 hours between high-intensity plyometric sessions. The calculator provides personalized recovery time based on your fatigue levels and fitness level."
+        },
+        {
+          question: "Why does my jump height decrease during games?",
+          answer: "Jump fatigue is a combination of neuromuscular fatigue (nervous system) and metabolic fatigue (energy depletion). Both reduce your explosive power output, resulting in lower jump heights as activity continues."
+        }
+      ])
+    ]
+  };
+
   const calculateFatigue = (data: JumpFatigueCalculatorForm) => {
     setIsCalculating(true);
-    
+
     setTimeout(() => {
       const performanceDrop = ((data.restingJump - data.fatigueJump) / data.restingJump) * 100;
       const fatigueIndex = Math.min(100, Math.max(0, performanceDrop));
@@ -119,33 +165,13 @@ export default function JumpFatigueCalculator() {
         trainingAdjustments,
         nextTestTime: nextTestTime.toLocaleString(),
       });
-      
+
       setIsCalculating(false);
     }, 800);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50">
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/calculators">
-              <Button variant="ghost" className="text-red-600 hover:text-red-700">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Calculators
-              </Button>
-            </Link>
-            <nav className="hidden md:flex space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-red-600 transition-colors">
-                Dunk Calculator
-              </Link>
-              <Link href="/calculators/vertical-jump-calculator" className="text-gray-600 hover:text-red-600 transition-colors">
-                Vertical Jump Calculator
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </div>
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Jump Fatigue Calculator" className="bg-gradient-to-br from-red-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
@@ -161,6 +187,91 @@ export default function JumpFatigueCalculator() {
             Track how fatigue affects your jumping performance and get recovery recommendations for optimal training adaptation.
           </p>
         </div>
+
+        {/* Quick Tips Section */}
+        <div className="grid md:grid-cols-3 gap-4 mb-10">
+          <Card className="bg-gradient-to-br from-red-50 to-orange-50 border-red-200">
+            <CardContent className="pt-6">
+              <div className="flex items-start">
+                <AlertTriangle className="w-5 h-5 text-red-500 mr-3 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">What is Jump Fatigue?</h3>
+                  <p className="text-sm text-gray-600">The decrease in vertical jump height after training or competition due to muscle fatigue and nervous system depletion.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200">
+            <CardContent className="pt-6">
+              <div className="flex items-start">
+                <Clock className="w-5 h-5 text-blue-500 mr-3 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">When to Test</h3>
+                  <p className="text-sm text-gray-600">Test your rested jump in the morning after 48+ hours rest. Test fatigued jump immediately after training.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
+            <CardContent className="pt-6">
+              <div className="flex items-start">
+                <TrendingUp className="w-5 h-5 text-green-500 mr-3 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">Normal Fatigue</h3>
+                  <p className="text-sm text-gray-600">10-15% decrease is normal after intense training. Over 25% indicates you may need more recovery.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Fatigue Index Reference */}
+        <Card className="mb-10 bg-white/80 backdrop-blur-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">Fatigue Index Reference Guide</CardTitle>
+            <CardDescription>Understand what your fatigue percentage means</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-2 px-3">Fatigue Index</th>
+                    <th className="text-left py-2 px-3">Level</th>
+                    <th className="text-left py-2 px-3">Recovery Time</th>
+                    <th className="text-left py-2 px-3">Recommendation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b bg-green-50">
+                    <td className="py-2 px-3 font-medium text-green-700">0-10%</td>
+                    <td className="py-2 px-3">Minimal</td>
+                    <td className="py-2 px-3">24 hours</td>
+                    <td className="py-2 px-3">Ready for next session</td>
+                  </tr>
+                  <tr className="border-b bg-yellow-50">
+                    <td className="py-2 px-3 font-medium text-yellow-700">10-20%</td>
+                    <td className="py-2 px-3">Moderate</td>
+                    <td className="py-2 px-3">24-48 hours</td>
+                    <td className="py-2 px-3">Light active recovery</td>
+                  </tr>
+                  <tr className="border-b bg-orange-50">
+                    <td className="py-2 px-3 font-medium text-orange-700">20-30%</td>
+                    <td className="py-2 px-3">Significant</td>
+                    <td className="py-2 px-3">48-72 hours</td>
+                    <td className="py-2 px-3">Rest and recovery focus</td>
+                  </tr>
+                  <tr className="bg-red-50">
+                    <td className="py-2 px-3 font-medium text-red-700">30%+</td>
+                    <td className="py-2 px-3">Severe</td>
+                    <td className="py-2 px-3">72+ hours</td>
+                    <td className="py-2 px-3">Complete rest, evaluate program</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="grid lg:grid-cols-2 gap-8">
           <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
@@ -311,9 +422,9 @@ export default function JumpFatigueCalculator() {
                     />
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-red-600 hover:bg-red-700" 
+                  <Button
+                    type="submit"
+                    className="w-full bg-red-600 hover:bg-red-700"
                     disabled={isCalculating}
                   >
                     {isCalculating ? "Analyzing..." : "Analyze Fatigue"}
@@ -383,7 +494,53 @@ export default function JumpFatigueCalculator() {
             </Card>
           )}
         </div>
+
+        {/* Related Calculators */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Related Calculators</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/calculators/vertical-jump-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <TrendingDown className="w-5 h-5 mr-2 text-blue-600" />
+                    Vertical Jump Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Measure and track your vertical jump height with multiple calculation methods.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/calculators/ideal-body-weight-jump-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Target className="w-5 h-5 mr-2 text-green-600" />
+                    Body Weight Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Find your optimal body weight for maximum jumping performance.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/vertical-jump-training">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Zap className="w-5 h-5 mr-2 text-orange-600" />
+                    Training Programs
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Science-backed programs to improve your vertical jump and reduce fatigue.</p>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
+        </div>
       </div>
-    </div>
+    </SEOPageLayout>
   );
 }

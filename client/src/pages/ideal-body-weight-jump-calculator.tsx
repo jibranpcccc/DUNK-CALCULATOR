@@ -8,9 +8,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { idealWeightCalculatorSchema, type IdealWeightCalculatorForm } from "@/lib/validation-schemas";
-import { ArrowLeft, Scale, TrendingUp, Target, AlertCircle } from "lucide-react";
+import { Scale, TrendingUp, Target, AlertCircle, Calculator, Zap } from "lucide-react";
 import SEOPageLayout from "@/components/shared/seo-page-layout";
-import { generateCalculatorSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
+import { generateCalculatorSchema, generateWebPageSchema, generateFAQSchema, BreadcrumbItem } from "@/lib/seo";
 
 interface WeightResults {
   idealWeight: number;
@@ -41,32 +41,78 @@ export default function IdealBodyWeightJumpCalculator() {
     },
   });
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators' },
+    { name: 'Body Weight Calculator', url: '/calculators/ideal-body-weight-jump-calculator' }
+  ];
+
+  const seoData = {
+    title: "Ideal Body Weight Jump Calculator - Optimize Your Weight for Maximum Jump | Dunk Calculator Pro",
+    description: "Calculate your optimal body weight for maximum vertical jump performance. Get personalized nutrition guidelines, training modifications, and a realistic timeline to reach your ideal jumping weight.",
+    keywords: "ideal body weight jump, optimal weight for jumping, body weight vertical jump, jump performance weight, athletic weight calculator, power to weight ratio",
+    canonicalUrl: `${window.location.origin}/calculators/ideal-body-weight-jump-calculator`,
+    ogTitle: "Ideal Body Weight Jump Calculator - Optimize Your Weight for Maximum Jump",
+    ogDescription: "Calculate your optimal body weight for maximum vertical jump performance with personalized recommendations.",
+    twitterTitle: "Ideal Body Weight Jump Calculator - Optimize Your Weight",
+    twitterDescription: "Find your ideal weight for maximum jumping performance with nutrition and training guidelines.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateCalculatorSchema(
+        "Ideal Body Weight Jump Calculator",
+        "Calculator that determines optimal body weight for maximum vertical jump performance. Provides fat loss and muscle gain targets, nutrition guidelines, and training modifications.",
+        `${window.location.origin}/calculators/ideal-body-weight-jump-calculator`,
+        ["Current Weight", "Height", "Current Vertical", "Body Fat %", "Training Level", "Primary Goal", "Timeframe"],
+        ["Ideal Weight", "Weight Change", "Projected Vertical", "Timeline", "Nutrition Guidelines", "Training Modifications"]
+      ),
+      generateWebPageSchema(
+        "Ideal Body Weight Jump Calculator",
+        "Calculate your optimal body weight for maximum vertical jump performance.",
+        `${window.location.origin}/calculators/ideal-body-weight-jump-calculator`
+      ),
+      generateFAQSchema([
+        {
+          question: "Does losing weight increase vertical jump?",
+          answer: "Yes, if you lose fat while maintaining muscle. Every 5 lbs of fat loss (without muscle loss) can add approximately 0.5-1 inch to your vertical jump due to improved power-to-weight ratio."
+        },
+        {
+          question: "What is the ideal body fat percentage for jumping?",
+          answer: "Elite jumping athletes typically maintain 6-12% body fat for men and 12-20% for women. This optimizes the power-to-weight ratio while maintaining enough energy for high-intensity training."
+        },
+        {
+          question: "How fast can I safely change my weight for jumping?",
+          answer: "For fat loss, aim for 1-1.5 lbs per week maximum to preserve muscle. For muscle gain, 0.5 lbs per week is realistic. Faster changes risk losing the strength needed for jumping."
+        }
+      ])
+    ]
+  };
+
   const calculateIdealWeight = (data: IdealWeightCalculatorForm) => {
     setIsCalculating(true);
-    
+
     setTimeout(() => {
       // Calculate BMI and baseline metrics
       const heightInMeters = (data.height * 2.54) / 100;
       const currentBMI = data.currentWeight / (heightInMeters * heightInMeters);
-      
+
       // Estimate ideal weight based on athletic standards
       const athleticBMI = 22; // Optimal BMI for jumping athletes
       const idealWeight = athleticBMI * (heightInMeters * heightInMeters) * 2.20462; // Convert to lbs
-      
+
       const weightChange = idealWeight - data.currentWeight;
-      
+
       // Estimate body fat if not provided
       const estimatedBodyFat = data.bodyFatPercentage || (currentBMI > 25 ? 18 : currentBMI < 20 ? 12 : 15);
       const targetBodyFat = 8; // Optimal for jumping performance
-      
+
       // Calculate composition changes
       const fatLossNeeded = Math.max(0, (estimatedBodyFat - targetBodyFat) * data.currentWeight / 100);
       const muscleGainNeeded = Math.max(0, weightChange + fatLossNeeded);
-      
+
       // Estimate vertical jump improvement (0.5 inches per 5 lbs of optimal weight change)
       const projectedVertical = data.currentVertical + (Math.abs(weightChange) * 0.1);
       const verticalChange = projectedVertical - data.currentVertical;
-      
+
       // Calculate timeframe based on safe rates
       const safeWeeklyWeightLoss = 1.5; // lbs per week
       const safeWeeklyMuscleGain = 0.5; // lbs per week
@@ -74,34 +120,34 @@ export default function IdealBodyWeightJumpCalculator() {
         fatLossNeeded / safeWeeklyWeightLoss,
         muscleGainNeeded / safeWeeklyMuscleGain
       );
-      
+
       const strengthToWeightRatio = data.currentVertical / (data.currentWeight / 100);
-      
+
       // Generate recommendations
       const recommendations = [];
       if (weightChange < -10) recommendations.push("Focus on gradual fat loss while maintaining muscle mass");
       if (weightChange > 10) recommendations.push("Prioritize lean muscle gain with strength training");
       if (muscleGainNeeded > 15) recommendations.push("Consider working with a strength coach for optimal muscle development");
       if (fatLossNeeded > 20) recommendations.push("Implement a structured nutrition plan with moderate caloric deficit");
-      
+
       const nutritionGuidelines = [
         `Target ${Math.round(idealWeight * 0.8)}-${Math.round(idealWeight * 1.0)}g protein daily`,
         "Consume carbohydrates around training sessions for performance",
         "Maintain adequate hydration (0.5-1oz per lb bodyweight)",
         "Focus on whole foods with minimal processing"
       ];
-      
+
       const trainingModifications = [];
       if (weightChange < 0) trainingModifications.push("Increase training volume to preserve muscle during fat loss");
       if (weightChange > 0) trainingModifications.push("Focus on compound movements for efficient muscle gain");
       trainingModifications.push("Prioritize plyometric training for jump-specific adaptations");
       trainingModifications.push("Include periodized strength training 3-4x per week");
-      
+
       const riskFactors = [];
       if (Math.abs(weightChange) > 25) riskFactors.push("Significant weight change may affect performance initially");
       if (timeToReach > 26) riskFactors.push("Extended timeline may require motivation maintenance strategies");
       if (data.currentWeight < 120) riskFactors.push("Monitor for adequate nutrition during muscle gain phase");
-      
+
       setResults({
         idealWeight: Math.round(idealWeight),
         weightChange: Math.round(weightChange * 10) / 10,
@@ -122,17 +168,8 @@ export default function IdealBodyWeightJumpCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4 max-w-4xl">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <Link href="/calculators">
-            <Button variant="ghost" size="sm">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Calculators
-            </Button>
-          </Link>
-        </div>
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Body Weight Calculator" className="bg-gray-50 dark:bg-gray-900">
+      <div className="container mx-auto px-4 max-w-4xl py-8">
 
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -142,6 +179,92 @@ export default function IdealBodyWeightJumpCalculator() {
             Calculate your optimal body weight for maximum vertical jump performance with personalized nutrition and training recommendations.
           </p>
         </div>
+
+        {/* Quick Facts */}
+        <div className="grid md:grid-cols-3 gap-4 mb-8">
+          <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
+            <CardContent className="pt-6">
+              <div className="flex items-start">
+                <Scale className="w-5 h-5 text-blue-500 mr-3 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">Why Weight Matters</h3>
+                  <p className="text-sm text-gray-600">Every pound lost (while maintaining muscle) can add 0.5-1 inch to your vertical jump.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
+            <CardContent className="pt-6">
+              <div className="flex items-start">
+                <Target className="w-5 h-5 text-green-500 mr-3 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">Optimal Body Fat</h3>
+                  <p className="text-sm text-gray-600">Male athletes: 8-12% body fat. Female athletes: 14-18% for peak jumping performance.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-purple-200">
+            <CardContent className="pt-6">
+              <div className="flex items-start">
+                <TrendingUp className="w-5 h-5 text-purple-500 mr-3 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">Power-to-Weight</h3>
+                  <p className="text-sm text-gray-600">Your ratio of explosive strength to body mass determines jump height more than raw strength alone.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Body Composition Reference */}
+        <Card className="mb-8 bg-white shadow-md">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">Ideal Body Composition for Jumpers</CardTitle>
+            <CardDescription>Target ranges by sport and gender</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-2 px-3">Athlete Type</th>
+                    <th className="text-left py-2 px-3">Body Fat %</th>
+                    <th className="text-left py-2 px-3">Muscle Focus</th>
+                    <th className="text-left py-2 px-3">Example Athletes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b">
+                    <td className="py-2 px-3 font-medium">Basketball Guard</td>
+                    <td className="py-2 px-3">6-10%</td>
+                    <td className="py-2 px-3">Speed + Explosiveness</td>
+                    <td className="py-2 px-3 text-gray-500">Russell Westbrook, Ja Morant</td>
+                  </tr>
+                  <tr className="border-b bg-gray-50">
+                    <td className="py-2 px-3 font-medium">Basketball Forward</td>
+                    <td className="py-2 px-3">8-12%</td>
+                    <td className="py-2 px-3">Power + Size</td>
+                    <td className="py-2 px-3 text-gray-500">LeBron James, Zion Williamson</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2 px-3 font-medium">Volleyball</td>
+                    <td className="py-2 px-3">10-14%</td>
+                    <td className="py-2 px-3">Vertical Focus</td>
+                    <td className="py-2 px-3 text-gray-500">Pro volleyball players</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-3 font-medium">Track & Field</td>
+                    <td className="py-2 px-3">6-10%</td>
+                    <td className="py-2 px-3">Speed + Power</td>
+                    <td className="py-2 px-3 text-gray-500">High jumpers, sprinters</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Calculator Form */}
@@ -440,7 +563,7 @@ export default function IdealBodyWeightJumpCalculator() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-600">
-                  Higher power-to-weight ratios typically correlate with better jumping performance. 
+                  Higher power-to-weight ratios typically correlate with better jumping performance.
                   Reducing excess body fat while maintaining muscle mass optimizes this ratio.
                 </p>
               </CardContent>
@@ -452,7 +575,7 @@ export default function IdealBodyWeightJumpCalculator() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-600">
-                  Elite jumping athletes typically maintain 6-12% body fat. Lower body fat reduces dead weight 
+                  Elite jumping athletes typically maintain 6-12% body fat. Lower body fat reduces dead weight
                   while preserving the muscle needed for explosive power.
                 </p>
               </CardContent>
@@ -464,14 +587,60 @@ export default function IdealBodyWeightJumpCalculator() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-600">
-                  Fast-twitch muscle fibers are crucial for jumping. Quality strength training builds 
+                  Fast-twitch muscle fibers are crucial for jumping. Quality strength training builds
                   the specific muscle types needed for explosive vertical movement.
                 </p>
               </CardContent>
             </Card>
           </div>
         </div>
+
+        {/* Related Calculators */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Related Calculators</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/calculators/vertical-jump-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <TrendingUp className="w-5 h-5 mr-2 text-blue-600" />
+                    Vertical Jump Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Measure your vertical jump height with multiple methods.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/calculators/max-potential-jump-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Target className="w-5 h-5 mr-2 text-purple-600" />
+                    Max Potential Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Discover your maximum genetic jumping potential.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/vertical-jump-training">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Zap className="w-5 h-5 mr-2 text-orange-600" />
+                    Training Programs
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Science-backed training programs for jump improvement.</p>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
+        </div>
       </div>
-    </div>
+    </SEOPageLayout>
   );
 }

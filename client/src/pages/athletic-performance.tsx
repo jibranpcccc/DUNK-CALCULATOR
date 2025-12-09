@@ -2,11 +2,11 @@ import { Link } from "wouter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Target, 
-  TrendingUp, 
-  Zap, 
-  Activity, 
+import {
+  Target,
+  TrendingUp,
+  Zap,
+  Activity,
   Heart,
   Brain,
   Timer,
@@ -156,10 +156,10 @@ export default function AthleticPerformance() {
                     <Badge variant="secondary">15% impact</Badge>
                   </div>
                 </div>
-                
+
                 <div className="bg-orange-50 p-3 rounded-lg">
                   <p className="text-xs text-orange-700">
-                    <strong>Key Insight:</strong> While genetics play a role, optimal body composition 
+                    <strong>Key Insight:</strong> While genetics play a role, optimal body composition
                     and training can maximize your physical potential.
                   </p>
                 </div>
@@ -196,10 +196,10 @@ export default function AthleticPerformance() {
                     <Badge variant="secondary">10% impact</Badge>
                   </div>
                 </div>
-                
+
                 <div className="bg-blue-50 p-3 rounded-lg">
                   <p className="text-xs text-blue-700">
-                    <strong>Opportunity:</strong> Poor mechanics can reduce effective jumping ability 
+                    <strong>Opportunity:</strong> Poor mechanics can reduce effective jumping ability
                     by 20-40%. Technique work often yields immediate gains.
                   </p>
                 </div>
@@ -236,10 +236,10 @@ export default function AthleticPerformance() {
                     <Badge variant="secondary">10% impact</Badge>
                   </div>
                 </div>
-                
+
                 <div className="bg-purple-50 p-3 rounded-lg">
                   <p className="text-xs text-purple-700">
-                    <strong>Training Focus:</strong> Plyometric and explosive strength training 
+                    <strong>Training Focus:</strong> Plyometric and explosive strength training
                     are most effective for developing neuromuscular power.
                   </p>
                 </div>
@@ -276,10 +276,10 @@ export default function AthleticPerformance() {
                     <Badge variant="secondary">20% impact</Badge>
                   </div>
                 </div>
-                
+
                 <div className="bg-green-50 p-3 rounded-lg">
                   <p className="text-xs text-green-700">
-                    <strong>Reality Check:</strong> Mental barriers often prevent athletes from 
+                    <strong>Reality Check:</strong> Mental barriers often prevent athletes from
                     reaching their physical potential, especially in high-pressure situations.
                   </p>
                 </div>
@@ -316,10 +316,10 @@ export default function AthleticPerformance() {
                     <Badge variant="secondary">15% impact</Badge>
                   </div>
                 </div>
-                
+
                 <div className="bg-red-50 p-3 rounded-lg">
                   <p className="text-xs text-red-700">
-                    <strong>Critical Factor:</strong> Poor recovery can reduce training adaptations 
+                    <strong>Critical Factor:</strong> Poor recovery can reduce training adaptations
                     by up to 50% and increase injury risk significantly.
                   </p>
                 </div>
@@ -356,10 +356,10 @@ export default function AthleticPerformance() {
                     <Badge variant="secondary">20% impact</Badge>
                   </div>
                 </div>
-                
+
                 <div className="bg-indigo-50 p-3 rounded-lg">
                   <p className="text-xs text-indigo-700">
-                    <strong>Multiplier Effect:</strong> Optimal environment can accelerate 
+                    <strong>Multiplier Effect:</strong> Optimal environment can accelerate
                     development while poor conditions can severely limit progress.
                   </p>
                 </div>
@@ -550,25 +550,25 @@ export default function AthleticPerformance() {
                   <div className="border-l-4 border-orange-500 pl-4">
                     <h4 className="font-semibold mb-2">Technique Refinement</h4>
                     <p className="text-sm text-gray-600 mb-2">
-                      Focus on jump mechanics, arm swing timing, and takeoff optimization. 
+                      Focus on jump mechanics, arm swing timing, and takeoff optimization.
                       Often yields 2-6 inch improvements immediately.
                     </p>
                     <Badge variant="secondary">Expected gain: 2-6 inches</Badge>
                   </div>
-                  
+
                   <div className="border-l-4 border-orange-500 pl-4">
                     <h4 className="font-semibold mb-2">Mobility Enhancement</h4>
                     <p className="text-sm text-gray-600 mb-2">
-                      Hip flexor stretching, ankle mobility work, and thoracic spine 
+                      Hip flexor stretching, ankle mobility work, and thoracic spine
                       mobility can unlock restricted movement patterns.
                     </p>
                     <Badge variant="secondary">Expected gain: 1-4 inches</Badge>
                   </div>
-                  
+
                   <div className="border-l-4 border-orange-500 pl-4">
                     <h4 className="font-semibold mb-2">Mental Preparation</h4>
                     <p className="text-sm text-gray-600 mb-2">
-                      Visualization, confidence building, and removing mental barriers 
+                      Visualization, confidence building, and removing mental barriers
                       can unlock existing physical potential.
                     </p>
                     <Badge variant="secondary">Expected gain: 1-3 inches</Badge>
@@ -589,25 +589,25 @@ export default function AthleticPerformance() {
                   <div className="border-l-4 border-blue-500 pl-4">
                     <h4 className="font-semibold mb-2">Strength Foundation</h4>
                     <p className="text-sm text-gray-600 mb-2">
-                      Systematic strength development through progressive overload. 
+                      Systematic strength development through progressive overload.
                       Focus on compound movements and unilateral strength.
                     </p>
                     <Badge variant="secondary">Expected gain: 4-8 inches</Badge>
                   </div>
-                  
+
                   <div className="border-l-4 border-blue-500 pl-4">
                     <h4 className="font-semibold mb-2">Power Development</h4>
                     <p className="text-sm text-gray-600 mb-2">
-                      Plyometric training, Olympic lift derivatives, and reactive 
+                      Plyometric training, Olympic lift derivatives, and reactive
                       strength development for explosive power.
                     </p>
                     <Badge variant="secondary">Expected gain: 3-6 inches</Badge>
                   </div>
-                  
+
                   <div className="border-l-4 border-blue-500 pl-4">
                     <h4 className="font-semibold mb-2">Body Composition</h4>
                     <p className="text-sm text-gray-600 mb-2">
-                      Optimizing power-to-weight ratio through strategic muscle gain 
+                      Optimizing power-to-weight ratio through strategic muscle gain
                       and fat loss while maintaining performance.
                     </p>
                     <Badge variant="secondary">Expected gain: 2-5 inches</Badge>
@@ -637,7 +637,7 @@ export default function AthleticPerformance() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">
-                  Recent research shows that athletes can be categorized into force-deficit or velocity-deficit 
+                  Recent research shows that athletes can be categorized into force-deficit or velocity-deficit
                   profiles, which should guide training emphasis for optimal results.
                 </p>
                 <div className="bg-purple-50 p-4 rounded-lg mb-4">
@@ -662,7 +662,7 @@ export default function AthleticPerformance() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">
-                  New research reveals that recovery strategies can significantly impact training 
+                  New research reveals that recovery strategies can significantly impact training
                   adaptations and injury prevention in high-intensity jump training.
                 </p>
                 <div className="bg-green-50 p-4 rounded-lg mb-4">
@@ -677,6 +677,48 @@ export default function AthleticPerformance() {
                 <Badge className="bg-success-green">Source: Journal of Strength & Conditioning 2024</Badge>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* External Resources */}
+      <section className="py-12 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold mb-2">Research & Resources</h2>
+            <p className="text-gray-600">Explore authoritative sources on sports performance science</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <a
+              href="https://journals.lww.com/acsm-msse/pages/default.aspx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-lg mb-2">Medicine & Science in Sports</h3>
+              <p className="text-sm text-gray-600">Official journal of the American College of Sports Medicine with peer-reviewed research.</p>
+              <span className="text-purple-600 text-sm mt-2 inline-block">lww.com →</span>
+            </a>
+            <a
+              href="https://en.wikipedia.org/wiki/Biomechanics"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-lg mb-2">Biomechanics Overview</h3>
+              <p className="text-sm text-gray-600">Wikipedia's comprehensive introduction to biomechanics and human movement science.</p>
+              <span className="text-purple-600 text-sm mt-2 inline-block">wikipedia.org →</span>
+            </a>
+            <a
+              href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4550289/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-lg mb-2">Force-Velocity Profiling</h3>
+              <p className="text-sm text-gray-600">NIH research on individualized plyometric training based on force-velocity profiles.</p>
+              <span className="text-purple-600 text-sm mt-2 inline-block">nih.gov →</span>
+            </a>
           </div>
         </div>
       </section>
@@ -697,8 +739,8 @@ export default function AthleticPerformance() {
               </Button>
             </Link>
             <Link href="/calculators">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3"
               >
                 Browse Analysis Tools

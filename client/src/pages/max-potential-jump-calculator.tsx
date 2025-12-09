@@ -8,9 +8,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { maxPotentialCalculatorSchema, type MaxPotentialCalculatorForm } from "@/lib/validation-schemas";
-import { ArrowLeft, Target, TrendingUp, Clock, Star } from "lucide-react";
+import { Target, TrendingUp, Clock, Star, Calculator, Zap, Scale } from "lucide-react";
 import SEOPageLayout from "@/components/shared/seo-page-layout";
-import { generateCalculatorSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
+import { generateCalculatorSchema, generateWebPageSchema, generateFAQSchema, BreadcrumbItem } from "@/lib/seo";
 
 interface PotentialResults {
   maxPotential: number;
@@ -48,9 +48,55 @@ export default function MaxPotentialJumpCalculator() {
     },
   });
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators' },
+    { name: 'Max Potential Calculator', url: '/calculators/max-potential-jump-calculator' }
+  ];
+
+  const seoData = {
+    title: "Max Potential Jump Calculator - Discover Your Genetic Ceiling | Dunk Calculator Pro",
+    description: "Calculate your maximum vertical jump potential based on genetics, training experience, body type, and athletic background. Get realistic goals and personalized training phases.",
+    keywords: "max potential jump, vertical jump potential, genetic jump potential, vertical jump ceiling, athletic potential calculator, jump training goals",
+    canonicalUrl: `${window.location.origin}/calculators/max-potential-jump-calculator`,
+    ogTitle: "Max Potential Jump Calculator - Discover Your Genetic Ceiling",
+    ogDescription: "Calculate your maximum vertical jump potential based on your genetics and training experience.",
+    twitterTitle: "Max Potential Jump Calculator - Discover Your Genetic Ceiling",
+    twitterDescription: "Find out your maximum vertical jump potential with personalized training phases and realistic timelines.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateCalculatorSchema(
+        "Max Potential Jump Calculator",
+        "Calculator that estimates maximum vertical jump potential based on genetics, training experience, body type, and athletic background. Provides personalized training phases and realistic timelines.",
+        `${window.location.origin}/calculators/max-potential-jump-calculator`,
+        ["Current Vertical", "Age", "Training Experience", "Athletic Background", "Body Type", "Fast-Twitch Dominance", "Injury History"],
+        ["Maximum Potential", "Improvement Gap", "Training Timeline", "Confidence Level", "Training Phases"]
+      ),
+      generateWebPageSchema(
+        "Max Potential Jump Calculator",
+        "Calculate your maximum vertical jump potential based on genetics and training.",
+        `${window.location.origin}/calculators/max-potential-jump-calculator`
+      ),
+      generateFAQSchema([
+        {
+          question: "Can anyone increase their vertical jump?",
+          answer: "Yes! Most people can add 4-12 inches to their vertical jump with proper training. Beginners often see the fastest gains (2-4 inches in the first few months), while experienced athletes may gain 1-2 inches per year."
+        },
+        {
+          question: "What factors determine vertical jump potential?",
+          answer: "Your potential is influenced by fast-twitch muscle fiber percentage (genetics), limb length ratios, current training experience, age, body composition, and injury history. The calculator weighs all these factors."
+        },
+        {
+          question: "How long does it take to reach maximum potential?",
+          answer: "Reaching your genetic ceiling typically takes 2-5 years of consistent, progressive training. Most significant gains occur in the first 1-2 years. The calculator provides personalized timelines based on your profile."
+        }
+      ])
+    ]
+  };
+
   const calculateMaxPotential = (data: MaxPotentialCalculatorForm) => {
     setIsCalculating(true);
-    
+
     setTimeout(() => {
       // Base potential calculation
       let basePotential = data.currentVertical;
@@ -113,12 +159,12 @@ export default function MaxPotentialJumpCalculator() {
       };
 
       // Calculate potential gain
-      const totalFactor = ageFactor * 
-        experienceFactors[data.trainingExperience] * 
-        backgroundFactors[data.athleticBackground] * 
-        bodyTypeFactors[data.bodyType] * 
-        legLengthFactors[data.legLength] * 
-        fastTwitchFactors[data.fastTwitchDominance] * 
+      const totalFactor = ageFactor *
+        experienceFactors[data.trainingExperience] *
+        backgroundFactors[data.athleticBackground] *
+        bodyTypeFactors[data.bodyType] *
+        legLengthFactors[data.legLength] *
+        fastTwitchFactors[data.fastTwitchDominance] *
         injuryFactors[data.injuryHistory];
 
       const potentialGain = Math.min(24, basePotential * (totalFactor - 1));
@@ -127,8 +173,8 @@ export default function MaxPotentialJumpCalculator() {
       const percentageIncrease = (currentGap / basePotential) * 100;
 
       // Time to reach calculation
-      const monthsPerInch = data.trainingExperience === "beginner" ? 1.5 : 
-                           data.trainingExperience === "intermediate" ? 2.0 : 3.0;
+      const monthsPerInch = data.trainingExperience === "beginner" ? 1.5 :
+        data.trainingExperience === "intermediate" ? 2.0 : 3.0;
       const timeToReach = Math.max(6, currentGap * monthsPerInch);
 
       // Confidence level
@@ -156,7 +202,7 @@ export default function MaxPotentialJumpCalculator() {
         },
         {
           phase: "Power Development (Months 4-8)",
-          duration: "20 weeks", 
+          duration: "20 weeks",
           focus: "Plyometrics and explosive strength",
           expectedGain: currentGap * 0.4
         },
@@ -180,34 +226,13 @@ export default function MaxPotentialJumpCalculator() {
         geneticFactors: totalFactor > 1.5 ? "Above average genetic potential" : "Average genetic potential",
         recommendations: ["Follow structured periodized training", "Focus on consistency over intensity", "Monitor progress monthly"]
       });
-      
+
       setIsCalculating(false);
     }, 900);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/calculators">
-              <Button variant="ghost" className="text-purple-600 hover:text-purple-700">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Calculators
-              </Button>
-            </Link>
-            <nav className="hidden md:flex space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Dunk Calculator
-              </Link>
-              <Link href="/vertical-jump-training" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Training Programs
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </div>
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Max Potential Calculator" className="bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
@@ -224,6 +249,86 @@ export default function MaxPotentialJumpCalculator() {
             Discover your maximum jumping potential based on your genetic factors, training experience, and athletic background.
           </p>
         </div>
+
+        {/* Key Factors Overview */}
+        <div className="grid md:grid-cols-4 gap-4 mb-10">
+          <Card className="text-center bg-gradient-to-br from-purple-50 to-indigo-50 border-purple-200">
+            <CardContent className="pt-6">
+              <div className="text-3xl font-bold text-purple-600 mb-1">50%</div>
+              <div className="text-sm font-medium text-gray-700">Genetics</div>
+              <div className="text-xs text-gray-500">Muscle fiber type, limb length</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200">
+            <CardContent className="pt-6">
+              <div className="text-3xl font-bold text-blue-600 mb-1">30%</div>
+              <div className="text-sm font-medium text-gray-700">Training</div>
+              <div className="text-xs text-gray-500">Quality, consistency, program</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
+            <CardContent className="pt-6">
+              <div className="text-3xl font-bold text-green-600 mb-1">15%</div>
+              <div className="text-sm font-medium text-gray-700">Technique</div>
+              <div className="text-xs text-gray-500">Movement efficiency, timing</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center bg-gradient-to-br from-orange-50 to-amber-50 border-orange-200">
+            <CardContent className="pt-6">
+              <div className="text-3xl font-bold text-orange-600 mb-1">5%</div>
+              <div className="text-sm font-medium text-gray-700">Other</div>
+              <div className="text-xs text-gray-500">Nutrition, recovery, age</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Potential Ranges */}
+        <Card className="mb-10 bg-white/80 backdrop-blur-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">Vertical Jump Potential by Genetics</CardTitle>
+            <CardDescription>What's realistically achievable based on genetic predisposition</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-2 px-3">Genetic Profile</th>
+                    <th className="text-left py-2 px-3">Starting Range</th>
+                    <th className="text-left py-2 px-3">Max Potential</th>
+                    <th className="text-left py-2 px-3">Time to Peak</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b">
+                    <td className="py-2 px-3 font-medium">Elite Fast-Twitch</td>
+                    <td className="py-2 px-3">26-32"</td>
+                    <td className="py-2 px-3 text-purple-600 font-semibold">40-48"</td>
+                    <td className="py-2 px-3">2-4 years</td>
+                  </tr>
+                  <tr className="border-b bg-gray-50">
+                    <td className="py-2 px-3 font-medium">Above Average</td>
+                    <td className="py-2 px-3">22-28"</td>
+                    <td className="py-2 px-3 text-blue-600 font-semibold">32-40"</td>
+                    <td className="py-2 px-3">2-3 years</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2 px-3 font-medium">Average</td>
+                    <td className="py-2 px-3">18-24"</td>
+                    <td className="py-2 px-3 text-green-600 font-semibold">26-34"</td>
+                    <td className="py-2 px-3">1-2 years</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-3 font-medium">Below Average</td>
+                    <td className="py-2 px-3">12-18"</td>
+                    <td className="py-2 px-3 text-orange-600 font-semibold">22-28"</td>
+                    <td className="py-2 px-3">1-3 years</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="grid lg:grid-cols-2 gap-8">
           <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
@@ -425,9 +530,9 @@ export default function MaxPotentialJumpCalculator() {
                     />
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-purple-600 hover:bg-purple-700" 
+                  <Button
+                    type="submit"
+                    className="w-full bg-purple-600 hover:bg-purple-700"
                     disabled={isCalculating}
                   >
                     {isCalculating ? "Calculating..." : "Calculate Max Potential"}
@@ -508,7 +613,53 @@ export default function MaxPotentialJumpCalculator() {
             </Card>
           )}
         </div>
+
+        {/* Related Calculators */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Related Calculators</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/calculators/vertical-jump-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <TrendingUp className="w-5 h-5 mr-2 text-blue-600" />
+                    Vertical Jump Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Measure your current vertical jump height with multiple methods.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/calculators/ideal-body-weight-jump-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Scale className="w-5 h-5 mr-2 text-green-600" />
+                    Body Weight Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Find your optimal weight for maximum jumping performance.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/vertical-jump-training">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Zap className="w-5 h-5 mr-2 text-orange-600" />
+                    Training Programs
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Science-backed training to help you reach your maximum potential.</p>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
+        </div>
       </div>
-    </div>
+    </SEOPageLayout>
   );
 }

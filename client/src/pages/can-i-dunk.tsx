@@ -2,11 +2,11 @@ import { Link } from "wouter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Calculator, 
-  TrendingUp, 
-  Target, 
-  Activity, 
+import {
+  Calculator,
+  TrendingUp,
+  Target,
+  Activity,
   CheckCircle,
   XCircle,
   AlertTriangle,
@@ -23,37 +23,56 @@ export default function CanIDunk() {
     }
   };
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    { name: 'Can I Dunk?', url: '/can-i-dunk' }
+  ];
+
+  const seoData = {
+    title: "Can I Dunk? Complete Dunking Assessment & Requirements by Height | Dunk Calculator",
+    description: "Find out if you can dunk with our complete assessment tool. Get personalized requirements based on your height, standing reach, and vertical jump. Realistic timelines and training recommendations.",
+    keywords: "can i dunk, dunking requirements, dunk height calculator, vertical jump needed to dunk, basketball dunk assessment, how tall to dunk",
+    canonicalUrl: `${window.location.origin}/can-i-dunk`,
+    ogTitle: "Can I Dunk? Complete Basketball Dunking Assessment",
+    ogDescription: "Get a personalized dunking assessment based on your height, reach, and athleticism. Realistic requirements and training timelines.",
+    twitterTitle: "Can I Dunk? - Complete Dunking Assessment",
+    twitterDescription: "Find out if you can dunk with personalized requirements based on your measurements.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateArticleSchema(
+        "Can I Dunk? The Complete Basketball Dunking Assessment",
+        "Comprehensive guide to determine if you can dunk based on height, vertical jump, and training potential.",
+        new Date().toISOString(),
+        new Date().toISOString(),
+        "Dunk Calculator Pro Team",
+        `${window.location.origin}/can-i-dunk`
+      ),
+      generateWebPageSchema(
+        "Can I Dunk? Complete Dunking Assessment & Requirements",
+        "Find out if you can dunk with our complete assessment tool based on your height, standing reach, and vertical jump.",
+        `${window.location.origin}/can-i-dunk`
+      ),
+      generateFAQSchema([
+        {
+          question: "How tall do you need to be to dunk?",
+          answer: "While taller players have an advantage, players as short as 5'6\" have dunked. Height requirements vary based on standing reach and vertical jump ability."
+        },
+        {
+          question: "What vertical jump do I need to dunk?",
+          answer: "The required vertical jump depends on your height and standing reach. Typically, 6'0\" players need around 24-28 inches, while 5'8\" players may need 35-40 inches."
+        },
+        {
+          question: "How long does it take to learn to dunk?",
+          answer: "Timeline varies from 2-18 months depending on your starting point, height, and training dedication. Taller athletes with some jumping ability can achieve it faster."
+        }
+      ])
+    ]
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Can I Dunk?" className="bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center">
-                <div className="w-8 h-8 bg-basketball-orange rounded-full flex items-center justify-center mr-3">
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none"/>
-                    <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1"/>
-                  </svg>
-                </div>
-                <span className="text-xl font-bold text-gray-900">Dunk Calculator</span>
-              </Link>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Calculator
-              </Link>
-              <Link href="/calculators" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Tools
-              </Link>
-              <Link href="/vertical-jump-training" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Training
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-orange-600 to-red-600 text-white py-16">
@@ -527,8 +546,8 @@ export default function CanIDunk() {
               </Button>
             </Link>
             <Link href="/calculators">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3"
               >
                 Explore All Tools
@@ -537,6 +556,6 @@ export default function CanIDunk() {
           </div>
         </div>
       </section>
-    </div>
+    </SEOPageLayout>
   );
 }

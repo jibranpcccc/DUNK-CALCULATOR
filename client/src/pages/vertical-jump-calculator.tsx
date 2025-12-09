@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { verticalJumpCalculatorSchema, type VerticalJumpCalculatorForm } from "@/lib/validation-schemas";
 import { TrendingUp, ArrowLeft, Calculator, Target } from "lucide-react";
 import SEOPageLayout from "@/components/shared/seo-page-layout";
-import { generateCalculatorSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
+import { generateCalculatorSchema, generateWebPageSchema, generateFAQSchema, BreadcrumbItem } from "@/lib/seo";
 
 interface JumpResults {
   verticalJump: number;
@@ -52,7 +52,21 @@ export default function VerticalJumpCalculator() {
         "Vertical Jump Calculator - Measure & Track Your Jump Height",
         "Professional vertical jump calculator with multiple measurement methods. Calculate your vertical leap, get percentile rankings, power output analysis, and personalized training recommendations.",
         `${window.location.origin}/calculators/vertical-jump-calculator`
-      )
+      ),
+      generateFAQSchema([
+        {
+          question: "What is a good vertical jump height?",
+          answer: "For men, 16-20 inches is average, 20-24 inches is above average, and 28+ inches is excellent. NBA players average 28-32 inches. For women, subtract about 4-6 inches from each category."
+        },
+        {
+          question: "How can I increase my vertical jump?",
+          answer: "Focus on plyometric exercises (box jumps, depth jumps), strength training (squats, deadlifts), and proper technique. Most people can add 4-8 inches with 8-12 weeks of dedicated training."
+        },
+        {
+          question: "What muscles are used in vertical jumping?",
+          answer: "The primary muscles are quadriceps, glutes, hamstrings, and calves. Core muscles stabilize the body, while hip flexors help bring knees up. Fast-twitch muscle fibers are especially important for explosive jumping."
+        }
+      ])
     ]
   };
 
@@ -69,10 +83,10 @@ export default function VerticalJumpCalculator() {
 
   const calculateVerticalJump = (data: VerticalJumpCalculatorForm) => {
     setIsCalculating(true);
-    
+
     setTimeout(() => {
       let verticalJump = 0;
-      
+
       // Calculate based on method
       if (data.jumpMethod === "hangTime" && data.hangTime) {
         // Formula: h = (g * t²) / 8, where t is hang time
@@ -133,7 +147,7 @@ export default function VerticalJumpCalculator() {
         assessment,
         recommendations,
       });
-      
+
       setIsCalculating(false);
     }, 800);
   };
@@ -152,8 +166,30 @@ export default function VerticalJumpCalculator() {
             Vertical Jump Calculator
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Measure and analyze your vertical jump performance with multiple calculation methods. 
+            Measure and analyze your vertical jump performance with multiple calculation methods.
             Get detailed insights and personalized training recommendations.
+          </p>
+        </div>
+
+        {/* Measurement Guide Infographic */}
+        <div className="mb-12 max-w-2xl mx-auto">
+          <Card className="overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3">
+              <CardTitle className="text-lg text-center">How to Measure Your Vertical Jump</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <img
+                src="/images/vertical-jump-measurement.png"
+                alt="Step-by-step infographic showing how to measure vertical jump height using the wall test method"
+                className="w-full h-auto"
+                loading="lazy"
+              />
+            </CardContent>
+          </Card>
+          <p className="text-center text-sm text-gray-500 mt-2">
+            <Link href="/guides/how-to-measure-vertical-jump" className="text-blue-600 hover:underline">
+              View detailed measurement guide →
+            </Link>
           </p>
         </div>
 
@@ -414,6 +450,52 @@ export default function VerticalJumpCalculator() {
                 </ul>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Related Calculators */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Related Calculators</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/calculators/standing-reach-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Target className="w-5 h-5 mr-2 text-green-600" />
+                    Standing Reach Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Calculate your standing reach for accurate dunk requirements.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/calculators/jump-fatigue-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Calculator className="w-5 h-5 mr-2 text-red-600" />
+                    Jump Fatigue Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Track how fatigue affects your jumping performance.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/calculators/max-potential-jump-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <TrendingUp className="w-5 h-5 mr-2 text-purple-600" />
+                    Max Potential Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Discover your maximum vertical jump potential.</p>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </div>
       </div>

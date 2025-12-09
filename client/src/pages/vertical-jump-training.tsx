@@ -2,12 +2,12 @@ import { Link } from "wouter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Target, 
-  Clock, 
-  TrendingUp, 
-  Zap, 
-  Activity, 
+import {
+  Target,
+  Clock,
+  TrendingUp,
+  Zap,
+  Activity,
   Calendar,
   CheckCircle,
   AlertCircle,
@@ -169,7 +169,7 @@ export default function VerticalJumpTraining() {
                     3-4 sessions per week
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <h4 className="font-semibold">Program Focus:</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
@@ -179,8 +179,8 @@ export default function VerticalJumpTraining() {
                     <li>• Injury prevention</li>
                   </ul>
                 </div>
-                
-                <Button 
+
+                <Button
                   className="w-full"
                   onClick={() => handleProgramStart('Foundation Builder')}
                 >
@@ -216,7 +216,7 @@ export default function VerticalJumpTraining() {
                     4-5 sessions per week
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <h4 className="font-semibold">Program Focus:</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
@@ -226,8 +226,8 @@ export default function VerticalJumpTraining() {
                     <li>• Power-to-weight optimization</li>
                   </ul>
                 </div>
-                
-                <Button 
+
+                <Button
                   className="w-full bg-basketball-orange hover:bg-orange-700"
                   onClick={() => handleProgramStart('Power Developer')}
                 >
@@ -263,7 +263,7 @@ export default function VerticalJumpTraining() {
                     5-6 sessions per week
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <h4 className="font-semibold">Program Focus:</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
@@ -273,8 +273,8 @@ export default function VerticalJumpTraining() {
                     <li>• Competition preparation</li>
                   </ul>
                 </div>
-                
-                <Button 
+
+                <Button
                   className="w-full bg-purple-600 hover:bg-purple-700"
                   onClick={() => handleProgramStart('Elite Performance')}
                 >
@@ -424,7 +424,7 @@ export default function VerticalJumpTraining() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">
-                  Systematically increase training demands to force adaptation. This applies to load, volume, 
+                  Systematically increase training demands to force adaptation. This applies to load, volume,
                   intensity, and complexity of exercises over time.
                 </p>
                 <div className="bg-orange-50 p-4 rounded-lg">
@@ -448,7 +448,7 @@ export default function VerticalJumpTraining() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">
-                  Training adaptations are specific to the demands placed on the body. Jump training 
+                  Training adaptations are specific to the demands placed on the body. Jump training
                   should closely mirror the movement patterns and energy systems used in dunking.
                 </p>
                 <div className="bg-blue-50 p-4 rounded-lg">
@@ -472,7 +472,7 @@ export default function VerticalJumpTraining() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">
-                  High-intensity jump training creates significant neuromuscular fatigue. Adequate recovery 
+                  High-intensity jump training creates significant neuromuscular fatigue. Adequate recovery
                   is essential for adaptation and injury prevention.
                 </p>
                 <div className="bg-green-50 p-4 rounded-lg">
@@ -496,7 +496,7 @@ export default function VerticalJumpTraining() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">
-                  Systematic planning of training variables to optimize performance and prevent plateaus. 
+                  Systematic planning of training variables to optimize performance and prevent plateaus.
                   Periodization helps manage fatigue while maximizing adaptations.
                 </p>
                 <div className="bg-purple-50 p-4 rounded-lg">
@@ -568,6 +568,48 @@ export default function VerticalJumpTraining() {
         </div>
       </section>
 
+      {/* External Resources */}
+      <section className="py-12 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold mb-2">Additional Resources</h2>
+            <p className="text-gray-600">Learn more from authoritative sources in sports science</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <a
+              href="https://www.nsca.com/education/articles/kinetic-select/plyometric-training-for-vertical-jump-performance/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-lg mb-2">NSCA: Plyometric Training</h3>
+              <p className="text-sm text-gray-600">National Strength and Conditioning Association research on plyometric training for vertical jump performance.</p>
+              <span className="text-blue-600 text-sm mt-2 inline-block">nsca.com →</span>
+            </a>
+            <a
+              href="https://www.acsm.org/education-resources/trending-topics-resources/resource-library"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-lg mb-2">ACSM: Exercise Guidelines</h3>
+              <p className="text-sm text-gray-600">American College of Sports Medicine resources on exercise prescription and athletic training.</p>
+              <span className="text-blue-600 text-sm mt-2 inline-block">acsm.org →</span>
+            </a>
+            <a
+              href="https://www.nba.com/news/how-to-improve-your-vertical-jump"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-lg mb-2">NBA: Jump Training Tips</h3>
+              <p className="text-sm text-gray-600">Official NBA guidance on improving vertical jump for basketball players.</p>
+              <span className="text-blue-600 text-sm mt-2 inline-block">nba.com →</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-br from-orange-600 to-red-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -584,7 +626,7 @@ export default function VerticalJumpTraining() {
               </Button>
             </Link>
             <Link href="/calculators">
-              <Button 
+              <Button
                 className="border-2 border-white bg-black/30 backdrop-blur-sm text-white hover:bg-white hover:text-orange-600 px-8 py-3 font-semibold shadow-lg"
               >
                 Browse All Tools

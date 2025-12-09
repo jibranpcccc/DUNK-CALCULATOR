@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { standingReachCalculatorSchema, type StandingReachCalculatorForm } from "@/lib/validation-schemas";
 import { Calculator, ArrowLeft, Ruler, Target } from "lucide-react";
 import SEOPageLayout from "@/components/shared/seo-page-layout";
-import { generateCalculatorSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
+import { generateCalculatorSchema, generateWebPageSchema, generateFAQSchema, BreadcrumbItem } from "@/lib/seo";
 
 interface ReachResults {
   estimatedReach: number;
@@ -53,7 +53,21 @@ export default function StandingReachCalculator() {
         "Standing Reach Calculator - Calculate Your Basketball Reach",
         "Professional standing reach calculator for basketball players. Calculate your standing reach based on height and body proportions. Essential for accurate dunk requirements.",
         `${window.location.origin}/calculators/standing-reach-calculator`
-      )
+      ),
+      generateFAQSchema([
+        {
+          question: "How do I measure my standing reach?",
+          answer: "Stand flat-footed against a wall with your dominant arm raised straight up. Have someone mark the highest point you can touch. Measure from the floor to that mark—this is your standing reach."
+        },
+        {
+          question: "What is the average standing reach for my height?",
+          answer: "Standing reach is typically 1.33x your height. For a 6'0\" (72\") person, the average standing reach is about 96\" (8 feet). Wingspan and arm length cause individual variations of 2-4 inches."
+        },
+        {
+          question: "Why is standing reach important for dunking?",
+          answer: "Standing reach determines how high the rim is relative to your maximum reach. A higher standing reach means you need less vertical jump to dunk. It's the most important factor after height for dunking ability."
+        }
+      ])
     ]
   };
 
@@ -70,21 +84,21 @@ export default function StandingReachCalculator() {
 
   const calculateReach = (data: StandingReachCalculatorForm) => {
     setIsCalculating(true);
-    
+
     setTimeout(() => {
       let estimatedReach = 0;
       let actualReach = data.standingReach || 0;
-      
+
       // Base estimation using height
       if (data.calculationType === "estimate" || !data.standingReach) {
         // Standard ratio is approximately 1.33 for males, 1.31 for females
         const baseRatio = data.gender === "male" ? 1.33 : 1.31;
-        
+
         // Adjust for sport (basketball players tend to have longer reaches)
         let sportModifier = 1.0;
         if (data.sport === "basketball") sportModifier = 1.02;
         else if (data.sport === "volleyball") sportModifier = 1.01;
-        
+
         // Use arm span if available for better accuracy
         if (data.armSpan) {
           estimatedReach = data.armSpan * 0.98; // Reach is typically 98% of arm span
@@ -138,7 +152,7 @@ export default function StandingReachCalculator() {
       const rimHeight = 120; // Standard 10-foot rim
       const minClearance = 6; // Minimum clearance needed
       const requiredReach = rimHeight + minClearance;
-      
+
       if (estimatedReach >= requiredReach) {
         dungPotential = "You can potentially dunk with minimal vertical jump requirement!";
       } else {
@@ -160,7 +174,7 @@ export default function StandingReachCalculator() {
         recommendations,
         dungPotential,
       });
-      
+
       setIsCalculating(false);
     }, 600);
   };
@@ -179,8 +193,28 @@ export default function StandingReachCalculator() {
             Standing Reach Calculator
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Calculate your standing reach based on height and body proportions, or verify existing measurements. 
+            Calculate your standing reach based on height and body proportions, or verify existing measurements.
             Essential for accurate dunking assessments.
+          </p>
+        </div>
+
+        {/* Body Proportion Diagram */}
+        <div className="mb-12 max-w-2xl mx-auto">
+          <Card className="overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-green-500 to-teal-500 text-white py-3">
+              <CardTitle className="text-lg text-center">Understanding Standing Reach</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <img
+                src="/images/standing-reach-diagram.png"
+                alt="Body proportion diagram showing how height relates to standing reach measurement"
+                className="w-full h-auto"
+                loading="lazy"
+              />
+            </CardContent>
+          </Card>
+          <p className="text-center text-sm text-gray-500 mt-2">
+            Standing reach is typically 1.33× your height for males and 1.31× for females
           </p>
         </div>
 
@@ -447,6 +481,52 @@ export default function StandingReachCalculator() {
                 </ul>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Related Calculators */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Related Calculators</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/calculators/vertical-jump-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Ruler className="w-5 h-5 mr-2 text-blue-600" />
+                    Vertical Jump Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Measure your vertical jump with multiple methods.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Calculator className="w-5 h-5 mr-2 text-orange-600" />
+                    Dunk Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Calculate exactly what you need to dunk a basketball.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/calculators/ideal-body-weight-jump-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Target className="w-5 h-5 mr-2 text-green-600" />
+                    Body Weight Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Find your optimal weight for maximum jump performance.</p>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </div>
       </div>

@@ -2,11 +2,11 @@ import { Link } from "wouter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Ruler, 
-  Target, 
-  TrendingUp, 
-  Activity, 
+import {
+  Ruler,
+  Target,
+  TrendingUp,
+  Activity,
   CheckCircle,
   AlertTriangle,
   Users,
@@ -116,8 +116,41 @@ export default function DunkingRequirementsByHeight() {
     }
   };
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: "Home", url: "/" },
+    { name: "Dunking Requirements by Height", url: "/dunking-requirements-by-height" }
+  ];
+
+  const seoData = {
+    title: "Dunking Requirements by Height - Vertical Jump Needed to Dunk | Dunk Calculator Pro",
+    description: "Discover exactly what vertical jump you need to dunk based on your height. Complete breakdown of requirements from 5'0\" to 6'8\"+ with realistic timelines and success rates.",
+    keywords: "dunking requirements by height, vertical jump needed to dunk, can I dunk at my height, dunk height requirements, basketball dunking height",
+    canonicalUrl: `${window.location.origin}/dunking-requirements-by-height`,
+    ogTitle: "Dunking Requirements by Height - What Vertical Jump Do You Need?",
+    ogDescription: "Complete height-based analysis of vertical jump requirements, timelines, and success rates for dunking a basketball.",
+    ogType: "article",
+    twitterTitle: "Dunking Requirements by Height - Complete Analysis",
+    twitterDescription: "Find out exactly what vertical jump you need to dunk based on your height.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateArticleSchema(
+        "Dunking Requirements by Height: Complete Analysis",
+        "Discover exactly what vertical jump you need to dunk based on your height, plus realistic timelines and success rates for each height category.",
+        new Date().toISOString(),
+        new Date().toISOString(),
+        "Dunk Calculator Pro Team",
+        `${window.location.origin}/dunking-requirements-by-height`
+      ),
+      generateWebPageSchema(
+        "Dunking Requirements by Height - Complete Analysis",
+        "Comprehensive breakdown of vertical jump requirements by height for dunking with success rates and training timelines.",
+        `${window.location.origin}/dunking-requirements-by-height`
+      )
+    ]
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Dunking Requirements by Height" className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -126,8 +159,8 @@ export default function DunkingRequirementsByHeight() {
               <Link href="/" className="flex items-center">
                 <div className="w-8 h-8 bg-basketball-orange rounded-full flex items-center justify-center mr-3">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none"/>
-                    <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1"/>
+                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none" />
+                    <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1" />
                   </svg>
                 </div>
                 <span className="text-xl font-bold text-gray-900">Dunk Calculator</span>
@@ -213,7 +246,7 @@ export default function DunkingRequirementsByHeight() {
                         {requirement.difficulty}
                       </Badge>
                     </div>
-                    
+
                     <div className="lg:col-span-1 space-y-3">
                       <div>
                         <div className="text-sm text-gray-500">Standing Reach</div>
@@ -416,8 +449,8 @@ export default function DunkingRequirementsByHeight() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="bg-white text-orange-600 hover:bg-gray-100"
                 style={{ fontWeight: '600' }}
               >
@@ -425,8 +458,8 @@ export default function DunkingRequirementsByHeight() {
               </Button>
             </Link>
             <Link href="/vertical-jump-training">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="bg-white text-orange-600 hover:bg-gray-100"
                 style={{ fontWeight: '600' }}
               >
@@ -436,6 +469,6 @@ export default function DunkingRequirementsByHeight() {
           </div>
         </div>
       </section>
-    </div>
+    </SEOPageLayout>
   );
 }

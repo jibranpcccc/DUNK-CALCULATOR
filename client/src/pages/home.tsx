@@ -79,11 +79,11 @@ export default function Home() {
             <div className="flex items-center">
               <div className="w-8 h-8 bg-basketball-orange rounded-full flex items-center justify-center mr-3">
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none"/>
-                  <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1"/>
+                  <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none" />
+                  <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1" />
                 </svg>
               </div>
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Dunk Calculator Pro</h1>
+              <span className="text-xl font-bold text-gray-900 dark:text-white">Dunk Calculator Pro</span>
             </div>
             <nav className="hidden md:flex space-x-8" role="navigation" aria-label="Main navigation">
               <button
@@ -93,22 +93,22 @@ export default function Home() {
               >
                 Calculator
               </button>
-              <Link 
-                href="/calculators" 
+              <Link
+                href="/calculators"
                 className="text-gray-700 dark:text-gray-300 hover:text-basketball-orange transition-colors"
                 aria-label="View all calculator tools"
               >
                 Tools
               </Link>
-              <Link 
-                href="/vertical-jump-training" 
+              <Link
+                href="/vertical-jump-training"
                 className="text-gray-700 dark:text-gray-300 hover:text-basketball-orange transition-colors"
                 aria-label="Vertical jump training guides"
               >
                 Training
               </Link>
-              <Link 
-                href="/athletic-performance" 
+              <Link
+                href="/athletic-performance"
                 className="text-gray-700 dark:text-gray-300 hover:text-basketball-orange transition-colors"
                 aria-label="Athletic performance analysis"
               >
@@ -319,7 +319,7 @@ export default function Home() {
                   <p className="mb-4">
                     Elite dunkers excel in multiple areas simultaneously. While you can't change your height, every other factor is trainable with dedication.
                   </p>
-                  <Button 
+                  <Button
                     onClick={() => scrollToSection('calculator')}
                     className="bg-white text-orange-600 hover:bg-gray-100 font-semibold"
                   >
@@ -913,8 +913,8 @@ export default function Home() {
               <div className="flex items-center mb-4">
                 <div className="w-8 h-8 bg-basketball-orange rounded-full flex items-center justify-center mr-3">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none"/>
-                    <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1"/>
+                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none" />
+                    <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1" />
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold">Dunk Calculator</h3>
@@ -923,7 +923,7 @@ export default function Home() {
                 Professional basketball performance tools and training resources for athletes at every level.
               </p>
             </div>
-            
+
             <div>
               <h4 className="text-lg font-semibold mb-4">Calculators</h4>
               <ul className="space-y-2">
@@ -933,29 +933,29 @@ export default function Home() {
                 <li><Link href="/calculators" className="text-gray-400 hover:text-white transition-colors">All Tools</Link></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="text-lg font-semibold mb-4">Training</h4>
               <ul className="space-y-2">
                 <li><Link href="/vertical-jump-training" className="text-gray-400 hover:text-white transition-colors">Jump Training</Link></li>
+                <li><Link href="/blog/beginner-vertical-jump-program" className="text-gray-400 hover:text-white transition-colors">8-Week Program</Link></li>
+                <li><Link href="/blog/plyometric-exercises-for-dunking" className="text-gray-400 hover:text-white transition-colors">Plyometric Exercises</Link></li>
                 <li><Link href="/athletic-performance" className="text-gray-400 hover:text-white transition-colors">Athletic Performance</Link></li>
-                <li><Link href="/how-to-dunk-a-basketball" className="text-gray-400 hover:text-white transition-colors">How to Dunk</Link></li>
-                <li><Link href="/can-i-dunk" className="text-gray-400 hover:text-white transition-colors">Can I Dunk?</Link></li>
               </ul>
             </div>
-            
+
             <div>
-              <h4 className="text-lg font-semibold mb-4">Resources</h4>
+              <h4 className="text-lg font-semibold mb-4">Guides</h4>
               <ul className="space-y-2">
+                <li><Link href="/guides/how-to-measure-vertical-jump" className="text-gray-400 hover:text-white transition-colors">Measure Jump</Link></li>
+                <li><Link href="/guides/types-of-dunks-explained" className="text-gray-400 hover:text-white transition-colors">Types of Dunks</Link></li>
+                <li><Link href="/how-to-dunk-a-basketball" className="text-gray-400 hover:text-white transition-colors">How to Dunk</Link></li>
+                <li><Link href="/can-i-dunk" className="text-gray-400 hover:text-white transition-colors">Can I Dunk?</Link></li>
                 <li><Link href="/dunking-requirements-by-height" className="text-gray-400 hover:text-white transition-colors">Height Requirements</Link></li>
-                <li><Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/guides/types-of-dunks-explained" className="text-gray-400 hover:text-white transition-colors">Dunk Types Guide</Link></li>
-                <li><button onClick={() => scrollToSection('faq')} className="text-gray-400 hover:text-white transition-colors">FAQ</button></li>
-                <li><button onClick={() => scrollToSection('physics')} className="text-gray-400 hover:text-white transition-colors">Physics</button></li>
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400">
               &copy; 2025 Dunk Calculator. Professional basketball performance analysis tools.

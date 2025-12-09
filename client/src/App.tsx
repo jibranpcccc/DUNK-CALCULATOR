@@ -18,6 +18,9 @@ import CanIDunk from "@/pages/can-i-dunk";
 import HowToDunkABasketball from "@/pages/how-to-dunk-a-basketball";
 import DunkingRequirementsByHeight from "@/pages/dunking-requirements-by-height";
 import TypesOfDunksExplained from "@/pages/guides/types-of-dunks-explained";
+import HowToMeasureVerticalJump from "@/pages/guides/how-to-measure-vertical-jump";
+import BeginnerVerticalJumpProgram from "@/pages/blog/beginner-vertical-jump-program";
+import PlyometricExercisesForDunking from "@/pages/blog/plyometric-exercises-for-dunking";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import NotFound from "@/pages/not-found";
 
@@ -38,6 +41,9 @@ function Router() {
       <Route path="/how-to-dunk-a-basketball" component={HowToDunkABasketball} />
       <Route path="/dunking-requirements-by-height" component={DunkingRequirementsByHeight} />
       <Route path="/guides/types-of-dunks-explained" component={TypesOfDunksExplained} />
+      <Route path="/guides/how-to-measure-vertical-jump" component={HowToMeasureVerticalJump} />
+      <Route path="/blog/beginner-vertical-jump-program" component={BeginnerVerticalJumpProgram} />
+      <Route path="/blog/plyometric-exercises-for-dunking" component={PlyometricExercisesForDunking} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route component={NotFound} />
     </Switch>

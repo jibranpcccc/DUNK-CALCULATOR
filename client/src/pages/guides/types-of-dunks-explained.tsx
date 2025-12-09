@@ -2,10 +2,10 @@ import { Link } from "wouter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
+import {
   Target,
-  Zap, 
-  Activity, 
+  Zap,
+  Activity,
   Award,
   Users,
   Clock,
@@ -14,7 +14,8 @@ import {
   Video,
   TrendingUp
 } from "lucide-react";
-import PageHeader from "@/components/shared/page-header";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateArticleSchema, generateWebPageSchema, generateFAQSchema, BreadcrumbItem } from "@/lib/seo";
 import DunkCard from "@/components/shared/dunk-card";
 import { dunkTypes, getDunksByStyle } from "@/components/shared/dunk-types-data";
 
@@ -26,9 +27,55 @@ export default function TypesOfDunksExplained() {
     }
   };
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    { name: 'Guides', url: '/guides' },
+    { name: 'Types of Dunks', url: '/guides/types-of-dunks-explained' }
+  ];
+
+  const seoData = {
+    title: "Types of Dunks Explained: Complete Guide to Every Dunking Style | Dunk Calculator",
+    description: "Master every basketball dunk type from basic power slams to advanced windmills, 360s, and between-the-legs. Learn techniques, requirements, and training for each style.",
+    keywords: "types of dunks, basketball dunk styles, windmill dunk, 360 dunk, tomahawk dunk, power dunk, between the legs dunk, dunk techniques",
+    canonicalUrl: `${window.location.origin}/guides/types-of-dunks-explained`,
+    ogTitle: "Types of Dunks Explained: Master Every Basketball Dunking Style",
+    ogDescription: "Complete guide to basketball dunking styles from basic power slams to advanced windmills and 360s.",
+    twitterTitle: "Types of Dunks Explained - Complete Dunking Style Guide",
+    twitterDescription: "Master every basketball dunk type with techniques, requirements, and training tips.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateArticleSchema(
+        "Types of Dunks Explained: Complete Guide to Every Dunking Style",
+        "Comprehensive guide to basketball dunking styles including power slams, windmills, 360s, tomahawks, and between-the-legs dunks.",
+        new Date().toISOString(),
+        new Date().toISOString(),
+        "Dunk Calculator Pro Team",
+        `${window.location.origin}/guides/types-of-dunks-explained`
+      ),
+      generateWebPageSchema(
+        "Types of Dunks Explained: Complete Guide to Every Dunking Style",
+        "Master every basketball dunk type from basic power slams to advanced windmills, 360s, and between-the-legs.",
+        `${window.location.origin}/guides/types-of-dunks-explained`
+      ),
+      generateFAQSchema([
+        {
+          question: "What is the easiest dunk to learn?",
+          answer: "The one-hand slam and two-hand power dunk are the easiest dunks to learn. They require the least hang time and are the foundation for all other dunking styles."
+        },
+        {
+          question: "How much vertical do you need for a windmill dunk?",
+          answer: "A windmill dunk typically requires 32-42 inches of vertical jump ability due to the extended hang time needed to complete the arm rotation."
+        },
+        {
+          question: "What dunk is the hardest to do?",
+          answer: "The between-the-legs dunk and 360 between-the-legs are considered the hardest dunks, requiring exceptional vertical jump, body control, and ball handling."
+        }
+      ])
+    ]
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <PageHeader currentPage="guides" />
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Types of Dunks" className="bg-gray-50">
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-purple-600 to-indigo-600 text-white py-16">
@@ -185,6 +232,6 @@ export default function TypesOfDunksExplained() {
           </div>
         </div>
       </section>
-    </div>
+    </SEOPageLayout>
   );
 }

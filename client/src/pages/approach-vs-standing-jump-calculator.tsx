@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { jumpComparisonCalculatorSchema, type JumpComparisonCalculatorForm } from "@/lib/validation-schemas";
 import { Activity, ArrowLeft, BarChart, Target } from "lucide-react";
 import SEOPageLayout from "@/components/shared/seo-page-layout";
-import { generateCalculatorSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
+import { generateCalculatorSchema, generateWebPageSchema, generateFAQSchema, BreadcrumbItem } from "@/lib/seo";
 
 interface ComparisonResults {
   approachAdvantage: number;
@@ -53,7 +53,21 @@ export default function ApproachVsStandingJumpCalculator() {
         "Approach vs Standing Jump Calculator - Compare Your Jump Styles",
         "Compare one-foot approach jump vs two-foot standing jump performance. Analyze your optimal jumping style, get personalized recommendations, and improve your vertical leap technique.",
         `${window.location.origin}/calculators/approach-vs-standing-jump-calculator`
-      )
+      ),
+      generateFAQSchema([
+        {
+          question: "What is the difference between approach and standing jump?",
+          answer: "A standing jump uses two feet from a stationary position, testing pure vertical power. An approach jump (running jump) uses one or two feet with a run-up, converting horizontal momentum into vertical height. Approach jumps are typically 20-40% higher."
+        },
+        {
+          question: "Which jump style is better for dunking?",
+          answer: "Most dunkers use an approach jump for game situations. One-foot jumpers benefit from speed and finesse, while two-foot jumpers generate more power. The best style depends on your body type and sport-specific needs."
+        },
+        {
+          question: "Why is my approach jump not much higher than my standing jump?",
+          answer: "A small difference (under 15%) suggests poor momentum transfer or technique issues. Focus on penultimate step mechanics, arm swing timing, and single-leg strength. Athletes should see 20-30% improvement with approach."
+        }
+      ])
     ]
   };
 
@@ -69,7 +83,7 @@ export default function ApproachVsStandingJumpCalculator() {
 
   const calculateComparison = (data: JumpComparisonCalculatorForm) => {
     setIsCalculating(true);
-    
+
     setTimeout(() => {
       const approachAdvantage = data.approachJump - data.standingJump;
       const percentageIncrease = data.standingJump > 0 ? (approachAdvantage / data.standingJump) * 100 : 0;
@@ -151,7 +165,7 @@ export default function ApproachVsStandingJumpCalculator() {
         optimalStyle,
         trainingFocus,
       });
-      
+
       setIsCalculating(false);
     }, 700);
   };
@@ -173,6 +187,84 @@ export default function ApproachVsStandingJumpCalculator() {
             Compare your one-foot approach jump versus two-foot standing jump to understand your athletic profile and optimize training.
           </p>
         </div>
+
+        {/* Jump Style Comparison */}
+        <div className="grid md:grid-cols-2 gap-6 mb-10">
+          <Card className="bg-gradient-to-br from-purple-50 to-indigo-50 border-purple-200">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center">
+                <Activity className="w-5 h-5 mr-2 text-purple-600" />
+                Approach Jump (1-Foot)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-sm text-gray-700">
+                <li>• Uses horizontal momentum from run-up</li>
+                <li>• Typically 20-40% higher than standing</li>
+                <li>• Favored by: Guards, track athletes</li>
+                <li>• Best for: Finishing at rim, dunking</li>
+              </ul>
+            </CardContent>
+          </Card>
+          <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center">
+                <BarChart className="w-5 h-5 mr-2 text-blue-600" />
+                Standing Jump (2-Foot)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-sm text-gray-700">
+                <li>• Pure vertical power from stationary</li>
+                <li>• More controlled and consistent</li>
+                <li>• Favored by: Centers, volleyball players</li>
+                <li>• Best for: Rebounding, blocking</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* What the Difference Means */}
+        <Card className="mb-10 bg-white/80 backdrop-blur-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">What Your Difference Means</CardTitle>
+            <CardDescription>Approach advantage percentage and athletic profile</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-2 px-3">Difference</th>
+                    <th className="text-left py-2 px-3">Profile</th>
+                    <th className="text-left py-2 px-3">Strength</th>
+                    <th className="text-left py-2 px-3">Focus Area</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b">
+                    <td className="py-2 px-3 font-medium text-blue-600">&lt;15%</td>
+                    <td className="py-2 px-3">Power Jumper</td>
+                    <td className="py-2 px-3">Bilateral strength</td>
+                    <td className="py-2 px-3">Single-leg plyometrics</td>
+                  </tr>
+                  <tr className="border-b bg-gray-50">
+                    <td className="py-2 px-3 font-medium text-green-600">15-30%</td>
+                    <td className="py-2 px-3">Balanced Jumper</td>
+                    <td className="py-2 px-3">Versatile ability</td>
+                    <td className="py-2 px-3">Sport-specific training</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-3 font-medium text-purple-600">&gt;30%</td>
+                    <td className="py-2 px-3">Speed Jumper</td>
+                    <td className="py-2 px-3">Momentum conversion</td>
+                    <td className="py-2 px-3">Standing jump work</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Calculator Form */}
@@ -254,7 +346,7 @@ export default function ApproachVsStandingJumpCalculator() {
                         <FormItem>
                           <FormLabel>Takeoff Leg</FormLabel>
                           <FormControl>
-                            <select 
+                            <select
                               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                               {...field}
                             >
@@ -276,7 +368,7 @@ export default function ApproachVsStandingJumpCalculator() {
                         <FormItem>
                           <FormLabel>Experience Level</FormLabel>
                           <FormControl>
-                            <select 
+                            <select
                               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                               {...field}
                             >
@@ -296,7 +388,7 @@ export default function ApproachVsStandingJumpCalculator() {
                         <FormItem>
                           <FormLabel>Primary Sport</FormLabel>
                           <FormControl>
-                            <select 
+                            <select
                               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                               {...field}
                             >
@@ -442,6 +534,52 @@ export default function ApproachVsStandingJumpCalculator() {
                 </ul>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Related Calculators */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Related Calculators</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/calculators/vertical-jump-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Activity className="w-5 h-5 mr-2 text-blue-600" />
+                    Vertical Jump Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Measure your vertical jump with multiple methods.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/calculators/jump-fatigue-calculator">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <BarChart className="w-5 h-5 mr-2 text-red-600" />
+                    Jump Fatigue Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Track how fatigue affects your jumping performance.</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/vertical-jump-training">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Target className="w-5 h-5 mr-2 text-green-600" />
+                    Training Programs
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">Science-backed programs to improve both jump styles.</p>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </div>
       </div>

@@ -2,11 +2,11 @@ import { Link } from "wouter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Play, 
-  Target, 
-  Activity, 
-  Clock, 
+import {
+  Play,
+  Target,
+  Activity,
+  Clock,
   CheckCircle,
   AlertTriangle,
   Zap,
@@ -30,9 +30,53 @@ export default function HowToDunkABasketball() {
     }
   };
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: "Home", url: "/" },
+    { name: "How to Dunk a Basketball", url: "/how-to-dunk-a-basketball" }
+  ];
+
+  const seoData = {
+    title: "How to Dunk a Basketball - Complete Step-by-Step Guide | Dunk Calculator Pro",
+    description: "Master the art of dunking with our comprehensive guide covering technique, training, mental preparation, and common mistakes. Step-by-step instructions for all skill levels.",
+    keywords: "how to dunk, dunk a basketball, dunking technique, basketball dunk tutorial, learn to dunk, dunking guide",
+    canonicalUrl: `${window.location.origin}/how-to-dunk-a-basketball`,
+    ogTitle: "How to Dunk a Basketball - Complete Step-by-Step Guide",
+    ogDescription: "Master dunking with comprehensive technique breakdown, training tips, and mental preparation strategies.",
+    ogType: "article",
+    twitterTitle: "How to Dunk a Basketball - Complete Guide",
+    twitterDescription: "Learn how to dunk with step-by-step instructions covering approach, takeoff, and execution.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateHowToSchema(
+        "How to Dunk a Basketball",
+        "Complete step-by-step guide to dunking a basketball, covering approach, takeoff, and execution technique.",
+        [
+          { name: "Master the Approach", text: "Take 3-5 accelerating steps toward the basket, building momentum while maintaining control." },
+          { name: "Execute the Takeoff", text: "Plant your foot 2-3 feet from the basket base, drive your knee upward and explode off the ground." },
+          { name: "Control the Flight", text: "Maintain balance in the air, extend your arm fully at maximum height." },
+          { name: "Complete the Dunk", text: "Drive the ball down through the rim forcefully and prepare for a safe landing." },
+          { name: "Land Safely", text: "Land on the balls of your feet with knees bent to absorb impact." }
+        ],
+        "PT30M"
+      ),
+      generateArticleSchema(
+        "How to Dunk a Basketball: Complete Guide",
+        "Master the art of dunking with this comprehensive step-by-step guide covering technique, training, and mental preparation.",
+        new Date().toISOString(),
+        new Date().toISOString(),
+        "Dunk Calculator Pro Team",
+        `${window.location.origin}/how-to-dunk-a-basketball`
+      ),
+      generateWebPageSchema(
+        "How to Dunk a Basketball - Complete Guide",
+        "Comprehensive guide to dunking a basketball with step-by-step technique, training programs, and common mistakes to avoid.",
+        `${window.location.origin}/how-to-dunk-a-basketball`
+      )
+    ]
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <PageHeader currentPage="guides" />
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="How to Dunk a Basketball" className="min-h-screen bg-gray-50">
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-orange-600 to-red-600 text-white py-16">
@@ -202,10 +246,10 @@ export default function HowToDunkABasketball() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-gray-600">
-                    Dunking is fundamentally about generating enough upward momentum to elevate your hand 
+                    Dunking is fundamentally about generating enough upward momentum to elevate your hand
                     above the rim. The minimum clearance needed depends on your hand size and dunking style.
                   </p>
-                  
+
                   <div className="bg-orange-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-orange-800 mb-2">Key Physics Concepts:</h4>
                     <ul className="text-sm text-orange-700 space-y-1">
@@ -215,7 +259,7 @@ export default function HowToDunkABasketball() {
                       <li>• Approach speed adds horizontal momentum for conversion</li>
                     </ul>
                   </div>
-                  
+
                   <div className="bg-gray-50 p-4 rounded-lg font-mono text-sm">
                     <p className="mb-2"><strong>Basic Formula:</strong></p>
                     <p>Hand Height = Standing Reach + Vertical Jump</p>
@@ -238,19 +282,19 @@ export default function HowToDunkABasketball() {
                       <p className="text-sm text-gray-600">Safest and most secure. Requires both hands above rim.</p>
                       <Badge variant="secondary" className="mt-1">Beginner Friendly</Badge>
                     </div>
-                    
+
                     <div className="border-l-4 border-green-500 pl-4">
                       <h4 className="font-semibold">One-Handed Dunk</h4>
                       <p className="text-sm text-gray-600">Classic dunk requiring strong grip and control.</p>
                       <Badge variant="secondary" className="mt-1">Intermediate</Badge>
                     </div>
-                    
+
                     <div className="border-l-4 border-purple-500 pl-4">
                       <h4 className="font-semibold">Tomahawk Dunk</h4>
                       <p className="text-sm text-gray-600">Powerful overhead slam with extended arm motion.</p>
                       <Badge variant="secondary" className="mt-1">Advanced</Badge>
                     </div>
-                    
+
                     {(() => {
                       const windmillDunk = getDunkByName("Windmill Dunk");
                       return windmillDunk ? (
@@ -282,7 +326,7 @@ export default function HowToDunkABasketball() {
                         <div><strong>Cons:</strong> Lower max height</div>
                       </div>
                     </div>
-                    
+
                     <div className="bg-blue-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-blue-800 mb-2">Running Approach (One-Foot Takeoff)</h4>
                       <p className="text-sm text-blue-700 mb-2">
@@ -293,7 +337,7 @@ export default function HowToDunkABasketball() {
                         <div><strong>Cons:</strong> More complex timing</div>
                       </div>
                     </div>
-                    
+
                     <div className="bg-purple-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-purple-800 mb-2">Two-Step Approach (Two-Foot Takeoff)</h4>
                       <p className="text-sm text-purple-700 mb-2">
@@ -317,10 +361,10 @@ export default function HowToDunkABasketball() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-gray-600">
-                    Mental barriers often prevent athletes from dunking even when they have the physical ability. 
+                    Mental barriers often prevent athletes from dunking even when they have the physical ability.
                     Confidence and commitment are crucial for successful dunking.
                   </p>
-                  
+
                   <div className="space-y-3">
                     <div className="flex items-start space-x-3">
                       <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-xs font-bold">1</div>
@@ -379,7 +423,7 @@ export default function HowToDunkABasketball() {
                       </ul>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <div className="bg-green-100 rounded-lg p-4">
                       <h4 className="font-semibold text-green-800 mb-2">Step 2: Acceleration</h4>
@@ -391,7 +435,7 @@ export default function HowToDunkABasketball() {
                       </ul>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <div className="bg-purple-100 rounded-lg p-4">
                       <h4 className="font-semibold text-purple-800 mb-2">Step 3: Penultimate Step</h4>
@@ -425,7 +469,7 @@ export default function HowToDunkABasketball() {
                         <li>• Drive opposite knee upward explosively</li>
                       </ul>
                     </div>
-                    
+
                     <div className="bg-red-100 rounded-lg p-4">
                       <h4 className="font-semibold text-red-800 mb-2">Arm Action</h4>
                       <ul className="text-sm text-red-700 space-y-1">
@@ -436,7 +480,7 @@ export default function HowToDunkABasketball() {
                       </ul>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <div className="bg-yellow-100 rounded-lg p-4">
                       <h4 className="font-semibold text-yellow-800 mb-2">Body Position</h4>
@@ -447,7 +491,7 @@ export default function HowToDunkABasketball() {
                         <li>• Shoulders squared to basket</li>
                       </ul>
                     </div>
-                    
+
                     <div className="bg-indigo-100 rounded-lg p-4">
                       <h4 className="font-semibold text-indigo-800 mb-2">Timing Cues</h4>
                       <ul className="text-sm text-indigo-700 space-y-1">
@@ -480,7 +524,7 @@ export default function HowToDunkABasketball() {
                         <li>• Release ball forcefully through rim</li>
                       </ul>
                     </div>
-                    
+
                     <div className="bg-blue-100 rounded-lg p-4">
                       <h4 className="font-semibold text-blue-800 mb-2">Body Control</h4>
                       <ul className="text-sm text-blue-700 space-y-1">
@@ -491,7 +535,7 @@ export default function HowToDunkABasketball() {
                       </ul>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <div className="bg-purple-100 rounded-lg p-4">
                       <h4 className="font-semibold text-purple-800 mb-2">Rim Contact</h4>
@@ -502,7 +546,7 @@ export default function HowToDunkABasketball() {
                         <li>• Don't hang on rim unnecessarily</li>
                       </ul>
                     </div>
-                    
+
                     <div className="bg-red-100 rounded-lg p-4">
                       <h4 className="font-semibold text-red-800 mb-2">Landing Safely</h4>
                       <ul className="text-sm text-red-700 space-y-1">
@@ -549,7 +593,7 @@ export default function HowToDunkABasketball() {
                       <li>• Single-leg strength development</li>
                     </ul>
                   </div>
-                  
+
                   <div className="border-l-4 border-blue-500 pl-4">
                     <h4 className="font-semibold">Power Development</h4>
                     <p className="text-sm text-gray-600 mb-2">
@@ -561,7 +605,7 @@ export default function HowToDunkABasketball() {
                       <li>• Sprint and agility work</li>
                     </ul>
                   </div>
-                  
+
                   <div className="border-l-4 border-green-500 pl-4">
                     <h4 className="font-semibold">Mobility & Flexibility</h4>
                     <p className="text-sm text-gray-600 mb-2">
@@ -574,7 +618,7 @@ export default function HowToDunkABasketball() {
                     </ul>
                   </div>
                 </div>
-                
+
                 <Link href="/vertical-jump-training">
                   <Button className="w-full">View Complete Training Programs</Button>
                 </Link>
@@ -601,7 +645,7 @@ export default function HowToDunkABasketball() {
                       <li>• Vertical jump from approach</li>
                     </ul>
                   </div>
-                  
+
                   <div className="border-l-4 border-red-500 pl-4">
                     <h4 className="font-semibold">Ball Handling</h4>
                     <p className="text-sm text-gray-600 mb-2">
@@ -613,7 +657,7 @@ export default function HowToDunkABasketball() {
                       <li>• One-handed control drills</li>
                     </ul>
                   </div>
-                  
+
                   <div className="border-l-4 border-yellow-500 pl-4">
                     <h4 className="font-semibold">Progressive Dunking</h4>
                     <p className="text-sm text-gray-600 mb-2">
@@ -626,7 +670,7 @@ export default function HowToDunkABasketball() {
                     </ul>
                   </div>
                 </div>
-                
+
                 <Link href="/calculators">
                   <Button className="w-full bg-blue-600 hover:bg-blue-700">
                     Use Training Tools
@@ -720,7 +764,7 @@ export default function HowToDunkABasketball() {
               </Button>
             </Link>
             <Link href="/vertical-jump-training">
-              <Button 
+              <Button
                 className="border-2 border-white bg-black/30 backdrop-blur-sm text-white hover:bg-white hover:text-orange-600 px-8 py-3 font-semibold shadow-lg"
               >
                 View Training Programs
@@ -729,6 +773,6 @@ export default function HowToDunkABasketball() {
           </div>
         </div>
       </section>
-    </div>
+    </SEOPageLayout>
   );
 }
