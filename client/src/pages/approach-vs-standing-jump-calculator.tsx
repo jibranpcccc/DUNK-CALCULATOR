@@ -188,6 +188,28 @@ export default function ApproachVsStandingJumpCalculator() {
           </p>
         </div>
 
+        {/* Visual Comparison Infographic */}
+        <div className="my-10">
+          <Card className="bg-white/90 backdrop-blur-sm border-purple-200 overflow-hidden">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg text-center">Approach vs Standing Jump Comparison</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4">
+              <img
+                src="/images/approach-vs-standing-chart.png"
+                alt="Infographic comparing approach jump (1-foot) versus standing jump (2-foot) techniques, showing average heights, advantages, and when to use each style"
+                className="w-full max-w-3xl mx-auto rounded-lg shadow-md"
+                loading="lazy"
+                width="800"
+                height="500"
+              />
+              <p className="text-center text-sm text-gray-500 mt-3">
+                Understanding the biomechanical differences helps optimize your training approach
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Jump Style Comparison */}
         <div className="grid md:grid-cols-2 gap-6 mb-10">
           <Card className="bg-gradient-to-br from-purple-50 to-indigo-50 border-purple-200">

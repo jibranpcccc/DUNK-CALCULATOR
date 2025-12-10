@@ -21,6 +21,12 @@ import TypesOfDunksExplained from "@/pages/guides/types-of-dunks-explained";
 import HowToMeasureVerticalJump from "@/pages/guides/how-to-measure-vertical-jump";
 import BeginnerVerticalJumpProgram from "@/pages/blog/beginner-vertical-jump-program";
 import PlyometricExercisesForDunking from "@/pages/blog/plyometric-exercises-for-dunking";
+import StrengthTrainingForExplosiveness from "@/pages/blog/strength-training-for-explosiveness";
+import SixWeekDunkProgram from "@/pages/blog/6-week-dunk-program";
+import ShortestNBAPlayersWhoDunked from "@/pages/blog/shortest-nba-players-who-dunked";
+import CanA5FootPersonDunk from "@/pages/blog/can-a-5-foot-person-dunk";
+import BestExercisesToJumpHigher from "@/pages/guides/best-exercises-to-jump-higher";
+import CommonVerticalJumpMistakes from "@/pages/guides/common-vertical-jump-mistakes";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import NotFound from "@/pages/not-found";
 
@@ -42,8 +48,14 @@ function Router() {
       <Route path="/dunking-requirements-by-height" component={DunkingRequirementsByHeight} />
       <Route path="/guides/types-of-dunks-explained" component={TypesOfDunksExplained} />
       <Route path="/guides/how-to-measure-vertical-jump" component={HowToMeasureVerticalJump} />
+      <Route path="/guides/best-exercises-to-jump-higher" component={BestExercisesToJumpHigher} />
+      <Route path="/guides/common-vertical-jump-mistakes" component={CommonVerticalJumpMistakes} />
       <Route path="/blog/beginner-vertical-jump-program" component={BeginnerVerticalJumpProgram} />
       <Route path="/blog/plyometric-exercises-for-dunking" component={PlyometricExercisesForDunking} />
+      <Route path="/blog/strength-training-for-explosiveness" component={StrengthTrainingForExplosiveness} />
+      <Route path="/blog/6-week-dunk-program" component={SixWeekDunkProgram} />
+      <Route path="/blog/shortest-nba-players-who-dunked" component={ShortestNBAPlayersWhoDunked} />
+      <Route path="/blog/can-a-5-foot-person-dunk" component={CanA5FootPersonDunk} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route component={NotFound} />
     </Switch>
